@@ -1,0 +1,435 @@
+<?php
+
+return [
+    'accepted' => ':attribute 必须接受。',
+    'accepted_if' => '当 :other 为 :value 时，:attribute 必须接受。',
+    'active_url' => ':attribute 必须是有效的网址。',
+    'after' => ':attribute 必须是 :date 之后的日期。',
+    'after_or_equal' => ':attribute 必须是 :date 或之后的日期。',
+    'alpha' => ':attribute 只能包含字母。',
+    'alpha_dash' => ':attribute 只能包含字母、数字、破折号和下划线。',
+    'alpha_num' => ':attribute 只能包含字母和数字。',
+    'array' => ':attribute 必须是数组。',
+    'ascii' => ':attribute 只能包含单字节字母数字字符和符号。',
+    'before' => ':attribute 必须是 :date 之前的日期。',
+    'before_or_equal' => ':attribute 必须是 :date 或之前的日期。',
+    'between' => [
+        'array' => ':attribute 必须包含 :min 到 :max 个项目。',
+        'file' => ':attribute 必须在 :min 到 :max KB 之间。',
+        'numeric' => ':attribute 必须在 :min 到 :max 之间。',
+        'string' => ':attribute 必须在 :min 到 :max 个字符之间。',
+    ],
+    'boolean' => ':attribute 必须为 true 或 false。',
+    'can' => ':attribute 包含未授权的值。',
+    'confirmed' => ':attribute 确认不匹配。',
+    'current_password' => '密码不正确。',
+    'date' => ':attribute 必须是有效日期。',
+    'date_equals' => ':attribute 必须等于 :date。',
+    'date_format' => ':attribute 必须符合格式 :format。',
+    'decimal' => ':attribute 必须有 :decimal 位小数。',
+    'declined' => ':attribute 必须被拒绝。',
+    'declined_if' => '当 :other 为 :value 时，:attribute 必须被拒绝。',
+    'different' => ':attribute 和 :other 必须不同。',
+    'digits' => ':attribute 必须是 :digits 位数字。',
+    'digits_between' => ':attribute 必须在 :min 到 :max 位数字之间。',
+    'dimensions' => ':attribute 的图片尺寸无效。',
+    'distinct' => ':attribute 包含重复值。',
+    'doesnt_end_with' => ':attribute 不能以以下值结尾：:values。',
+    'doesnt_start_with' => ':attribute 不能以以下值开头：:values。',
+    'email' => ':attribute 必须是有效的电子邮箱地址。',
+    'ends_with' => ':attribute 必须以下列值之一结尾：:values。',
+    'enum' => '所选的 :attribute 无效。',
+    'exists' => '所选的 :attribute 无效。',
+    'extensions' => ':attribute 必须具有以下扩展名之一：:values。',
+    'file' => ':attribute 必须是文件。',
+    'filled' => ':attribute 必须有值。',
+    'gt' => [
+        'array' => ':attribute 必须多于 :value 个项目。',
+        'file' => ':attribute 必须大于 :value KB。',
+        'numeric' => ':attribute 必须大于 :value。',
+        'string' => ':attribute 必须多于 :value 个字符。',
+    ],
+    'gte' => [
+        'array' => ':attribute 必须有 :value 个或更多项目。',
+        'file' => ':attribute 必须大于或等于 :value KB。',
+        'numeric' => ':attribute 必须大于或等于 :value。',
+        'string' => ':attribute 必须至少有 :value 个字符。',
+    ],
+    'hex_color' => ':attribute 必须是有效的十六进制颜色。',
+    'image' => ':attribute 必须是图片。',
+    'in' => '所选的 :attribute 无效。',
+    'in_array' => ':attribute 必须存在于 :other 中。',
+    'integer' => ':attribute 必须是整数。',
+    'ip' => ':attribute 必须是有效的 IP 地址。',
+    'ipv4' => ':attribute 必须是有效的 IPv4 地址。',
+    'ipv6' => ':attribute 必须是有效的 IPv6 地址。',
+    'json' => ':attribute 必须是有效的 JSON 字符串。',
+    'lowercase' => ':attribute 必须为小写。',
+    'lt' => [
+        'array' => ':attribute 必须少于 :value 个项目。',
+        'file' => ':attribute 必须小于 :value KB。',
+        'numeric' => ':attribute 必须小于 :value。',
+        'string' => ':attribute 必须少于 :value 个字符。',
+    ],
+    'lte' => [
+        'array' => ':attribute 不能多于 :value 个项目。',
+        'file' => ':attribute 必须小于或等于 :value KB。',
+        'numeric' => ':attribute 必须小于或等于 :value。',
+        'string' => ':attribute 不能多于 :value 个字符。',
+    ],
+    'mac_address' => ':attribute 必须是有效的 MAC 地址。',
+    'max' => [
+        'array' => ':attribute 不能多于 :max 个项目。',
+        'file' => ':attribute 不能大于 :max KB。',
+        'numeric' => ':attribute 不能大于 :max。',
+        'string' => ':attribute 不能超过 :max 个字符。',
+    ],
+    'max_digits' => ':attribute 不能多于 :max 位数字。',
+    'mimes' => ':attribute 必须是以下类型的文件：:values。',
+    'mimetypes' => ':attribute 必须是以下类型的文件：:values。',
+    'min' => [
+        'array' => ':attribute 至少要有 :min 个项目。',
+        'file' => ':attribute 至少为 :min KB。',
+        'numeric' => ':attribute 至少为 :min。',
+        'string' => ':attribute 至少要有 :min 个字符。',
+    ],
+    'min_digits' => ':attribute 至少要有 :min 位数字。',
+    'missing' => ':attribute 必须缺失。',
+    'missing_if' => '当 :other 为 :value 时，:attribute 必须缺失。',
+    'missing_unless' => ':attribute 必须缺失，除非 :other 在 :values 中。',
+    'missing_with' => '当 :values 存在时，:attribute 必须缺失。',
+    'missing_with_all' => '当 :values 存在时，:attribute 必须缺失。',
+    'multiple_of' => ':attribute 必须是 :value 的倍数。',
+    'not_in' => '所选的 :attribute 无效。',
+    'not_regex' => ':attribute 格式无效。',
+    'numeric' => ':attribute 必须是数字。',
+    'password' => '密码不正确。',
+    'password_letters' => ':attribute 至少要包含一个字母。',
+    'password_mixed' => ':attribute 至少要包含一个大写字母和一个小写字母。',
+    'password_numbers' => ':attribute 至少要包含一个数字。',
+    'password_symbols' => ':attribute 至少要包含一个符号。',
+    'password_uncompromised' => '给定的 :attribute 已出现在数据泄露中。请选择其他 :attribute。',
+    'present' => ':attribute 必须存在。',
+    'present_if' => '当 :other 为 :value 时，:attribute 必须存在。',
+    'present_unless' => ':attribute 必须存在，除非 :other 在 :values 中。',
+    'present_with' => '当 :values 存在时，:attribute 必须存在。',
+    'present_with_all' => '当 :values 存在时，:attribute 必须存在。',
+    'prohibited' => ':attribute 被禁止。',
+    'prohibited_if' => '当 :other 为 :value 时，:attribute 被禁止。',
+    'prohibited_unless' => ':attribute 被禁止，除非 :other 在 :values 中。',
+    'prohibits' => ':attribute 禁止 :other 出现。',
+    'regex' => ':attribute 格式无效。',
+    'required' => '此字段为必填项。',
+    'required_array_keys' => ':attribute 必须包含以下条目：:values。',
+    'required_if' => '当 :other 为 :value 时，:attribute 为必填项。',
+    'required_if_accepted' => '当 :other 被接受时，:attribute 为必填项。',
+    'required_unless' => ':attribute 为必填项，除非 :other 在 :values 中。',
+    'required_with' => '当 :values 存在时，:attribute 为必填项。',
+    'required_with_all' => '当 :values 存在时，:attribute 为必填项。',
+    'required_without' => '当 :values 不存在时，:attribute 为必填项。',
+    'required_without_all' => '当 :values 都不存在时，:attribute 为必填项。',
+    'same' => ':attribute 必须与 :other 一致。',
+    'size' => [
+        'array' => ':attribute 必须包含 :size 个项目。',
+        'file' => ':attribute 必须为 :size KB。',
+        'numeric' => ':attribute 必须为 :size。',
+        'string' => ':attribute 必须为 :size 个字符。',
+    ],
+    'starts_with' => ':attribute 必须以下列值之一开头：:values。',
+    'string' => ':attribute 必须是字符串。',
+    'timezone' => ':attribute 必须是有效时区。',
+    'unique' => ':attribute 已被占用。',
+    'uploaded' => ':attribute 上传失败。',
+    'uppercase' => ':attribute 必须为大写。',
+    'url' => ':attribute 必须是有效的网址。',
+    'ulid' => ':attribute 必须是有效的 ULID。',
+    'uuid' => ':attribute 必须是有效的 UUID。',
+    'custom' => [
+        'make' => [
+            'required' => '品牌为必填项。',
+        ],
+        'model' => [
+            'required' => '型号为必填项。',
+        ],
+        'vehicle_type' => [
+            'required' => '车辆类型为必填项。',
+        ],
+        'license_no' => [
+            'required' => '车牌号为必填项。',
+            'max' => '车牌号长度必须少于 8 个字符。',
+        ],
+        'color' => [
+            'required' => '颜色为必填项。',
+            'max' => '颜色长度必须少于 15 个字符。',
+        ],
+        'year' => [
+            'required' => '年份为必填项。',
+            'max' => '年份长度必须少于 4 个字符。',
+        ],
+        'power_type' => [
+            'required' => '动力类型为必填项。',
+        ],
+        'primary_vehicle' => [
+            'required' => '主要车辆为必填项。',
+        ],
+        'image' => [
+            'required_without' => '车辆照片为必填项。',
+            'image' => '车辆照片必须是图片。',
+            'mimes' => '车辆照片必须是以下类型的文件：jpeg、png、jpg、gif。',
+            'max' => '车辆照片必须小于 10MB。',
+        ],
+        'city_not_in_record' => [
+            'message' => '我们在记录中找不到该城市名称，请再次检查拼写。',
+        ],
+        'origin' => [
+            'message' => '出发地点为必填项。',
+        ],
+        'destination' => [
+            'message' => '目的地为必填项。',
+        ],
+        'origin.label' => [
+            'required' => '出发地点为必填项。',
+            'required_without' => '出发地点为必填项。'
+        ],
+        'destination.label' => [
+            'required' => '目的地为必填项。',
+            'required_without' => '目的地为必填项。'
+        ],
+        'date' => [
+            'required' => '日期为必填项。',
+        ],
+        'price_minor' => [
+            'required' => '价格为必填项。',
+            'gt' => '价格必须大于 0。',
+        ],
+        'stops.*.label' => ['required_with' => '每个停靠站的停靠位置为必填项。'],
+        'stops.*.departure_at' => ['required_with' => '每个停靠站的出发时间为必填项。'],
+        'stops.*.pickup_dropoff_location' => ['required_with' => '上下车地点为必填项。']
+        ,
+        'from' => [
+            'required' => '出发地点为必填项。',
+        ],
+        'to' => [
+            'required' => '目的地为必填项。',
+        ],
+        'pickup' => [
+            'required' => '上车地点为必填项。',
+        ],
+        'dropoff' => [
+            'required' => '下车地点为必填项。',
+        ],
+        'time' => [
+            'required' => '时间为必填项。',
+        ],
+        'details' => [
+            'required' => '详情为必填项。',
+        ],
+        'seats' => [
+            'required' => '请选择座位数量。',
+        ],
+        'smoke' => [
+            'required' => '请选择吸烟选项。',
+        ],
+        'animal_friendly' => [
+            'required' => '请选择是否允许携带宠物的选项。',
+        ],
+        'booking_method' => [
+            'required' => '请选择预订方式。',
+        ],
+        'luggage' => [
+            'required' => '请选择行李选项。',
+        ],
+        'price' => [
+            'required' => '价格为必填项。',
+        ],
+        'payment_method' => [
+            'required' => '请选择支付方式。',
+        ],
+        'middle_seats' => [
+            'required' => '请选择中间座位。',
+        ],
+        'back_seats' => [
+            'required' => '请选择后排座位。',
+        ],
+        'agree_terms' => [
+            'accepted' => '要继续操作，必须同意条款。',
+        ],
+        'email' => [
+            'required' => '电子邮箱地址为必填项。',
+            'email' => '请输入有效的电子邮箱地址，例如 name@example.com。',
+            'unique' => '该电子邮箱地址已存在账户。',
+        ],
+        'package' => [
+            'required' => '套餐为必填项。',
+        ],
+        'custom_amount' => [
+            'required' => '自定义金额为必填项。',
+        ],
+        'name' => [
+            'required' => '姓名为必填项。',
+        ],
+        'payment_method' => [
+            'required' => '支付方式为必填项。',
+            'in' => '支付方式无效。',
+        ],
+        'donation_acknowledgment' => [
+            'required' => '捐赠确认为必填项。',
+        ],
+        'terms_privacy' => [
+            'required' => '必须同意条款和隐私政策。',
+        ],
+        'name_on_card' => [
+            'required_if' => '使用信用卡支付时，持卡人姓名为必填项。',
+        ],
+        'card_element' => [
+            'required_if' => '使用信用卡支付时，银行卡信息为必填项。',
+        ],
+        'old_email' => [
+            'required' => '当前电子邮箱为必填项。',
+            'email' => '当前电子邮箱不是有效的电子邮箱地址。',
+        ],
+        'email_confirmation' => [
+            'required' => '确认电子邮箱为必填项。',
+            'email' => '确认电子邮箱不是有效的电子邮箱地址。',
+        ],
+        'first_name' => [
+            'required' => '名字为必填项。',
+            'regex' => '名字只能包含字母、空格和连字符。',
+        ],
+        'last_name' => [
+            'required' => '姓氏为必填项。',
+            'regex' => '姓氏只能包含字母、空格和连字符。',
+        ],
+        'password' => [
+            'required' => '密码为必填项。',
+            'min' => '密码长度不能少于 :min 个字符。',
+            'regex' => '密码必须包含大写字母、小写字母、数字和符号。',
+        ],
+        'password_confirmation' => [
+            'required' => '确认密码为必填项。',
+            'same' => '两次输入的密码不一致。',
+        ],
+        'pass1' => [
+            'required' => '当前密码为必填项。',
+        ],
+        'pass2' => [
+            'required' => '新密码为必填项。',
+            'string' => '新密码必须是字符串。',
+            'min' => '新密码长度不能少于 :min 个字符。',
+            'regex' => '新密码必须至少包含一个大写字母、一个小写字母、一个数字和一个特殊字符。',
+        ],
+        'pass3' => [
+            'required' => '确认新密码为必填项。',
+            'string' => '确认新密码必须是字符串。',
+            'same' => '确认密码与新密码不匹配。',
+        ],
+        'agree_cost_share_terms' => [
+            'required' => '请确认你同意费用分摊规则。',
+            'accepted' => '请确认你同意费用分摊规则。',
+        ],
+        'rideshare_disclaimer' => [
+            'required' => '在继续之前需要此确认。',
+            'accepted' => '在继续之前需要此确认。',
+        ],
+        'gender' => [
+            'required' => '性别为必填项。',
+        ],
+        'dob' => [
+            'required' => '出生日期为必填项。',
+            'date' => '出生日期必须是有效日期。',
+        ],
+        'country' => [
+            'required' => '国家为必填项。',
+        ],
+        'address' => [
+            'string' => '地址必须是字符串。',
+            'max' => '地址不能超过 :max 个字符。',
+        ],
+        'state' => [
+            'required' => '州/省为必填项。',
+            'string' => '州/省必须是字符串。',
+            'max' => '州/省不能超过 :max 个字符。',
+        ],
+        'city' => [
+            'required' => '城市为必填项。',
+            'string' => '城市必须是字符串。',
+            'max' => '城市不能超过 :max 个字符。',
+        ],
+        'zipcode' => [
+            'required' => '邮政编码为必填项。',
+            'string' => '邮政编码必须是字符串。',
+            'max' => '邮政编码不能超过 :max 个字符。',
+        ],
+        'government_issued_id' => [
+            'file' => '政府签发的身份证明必须是文件。',
+            'mimes' => '政府签发的身份证明必须是以下类型的文件：:values。',
+            'max' => '政府签发的身份证明必须小于 10MB。',
+        ],
+        'bio' => [
+            'required' => '个人简介为必填项。',
+            'string' => '个人简介必须是字符串。',
+            'max' => '个人简介不能超过 :max 个字符。',
+        ],
+        'phone' => [
+            'required' => '电话号码为必填项。',
+            'valid' => '请输入有效的电话号码。',
+            'unique' => '使用此电话号码的账户已存在。',
+        ],
+        'full_phone' => [
+            'max' => '电话号码必须少于20个字符。',
+            'unique' => '该电话号码已被使用。',
+        ],
+        'message' => [
+            'required' => '消息为必填项。',
+        ],
+        'student_card' => [
+            'required' => '学生卡为必填项。',
+            'mimes' => '图片必须是以下类型的文件：jpeg, png, jpg, gif, pdf。',
+            'max' => '图片必须小于10MB。',
+        ],
+        'payment_method' => [
+            'required' => '付款方式为必填项。',
+        ],
+        'card_id' => [
+            'required' => '请选择支付选项。',
+        ],
+        'dr_amount' => [
+            'required' => '金额为必填项。',
+        ],
+        'dr_amount.gt' => '金额必须大于 0。',
+    ],
+
+    'attributes' => [
+        'make' => '品牌',
+        'model' => '型号',
+        'vehicle_type' => '车辆类型',
+        'color' => '颜色',
+        'year' => '年份',
+        'license_no' => '车牌号',
+        'power_type' => '动力类型',
+        'primary_vehicle' => '主要车辆',
+        'image' => '车辆照片',
+        'email' => '电子邮箱地址',
+        'password' => '密码',
+        'first_name' => '名字',
+        'last_name' => '姓氏',
+        'gender' => '性别',
+        'dob' => '出生日期',
+        'country' => '国家',
+        'address' => '地址',
+        'state' => '州/省',
+        'city' => '城市',
+        'zipcode' => '邮政编码',
+        'government_issued_id' => '政府签发的身份证明',
+        'bio' => '个人简介',
+        'phone' => '电话号码',
+        'name' => '名称',
+        'title' => '标题',
+        'description' => '描述',
+        'pass1' => '当前密码',
+        'pass2' => '新密码',
+        'pass3' => '确认密码',
+        'name_on_card' => '持卡人姓名',
+        'card_element' => '银行卡信息',
+    ],
+];

@@ -1,0 +1,27 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use App\Models\Traits\HasLanguageFallback;
+
+class PinkRideFaqDetail extends Model
+{
+    use HasFactory, HasLanguageFallback;
+
+    protected $guarded = [];
+
+    public function pinkRideFaq(): BelongsTo
+    {
+        return $this->belongsTo(PinkRideFaq::class);
+    }
+
+    public function language(): BelongsTo
+    {
+        return $this->belongsTo(Language::class);
+    }
+
+    
+}
