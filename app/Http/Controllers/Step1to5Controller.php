@@ -1,0 +1,195 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\Country;
+use App\Models\Language;
+use App\Models\Notification;
+use App\Models\SelectLocationSettingDetail;
+use App\Models\Step1PageSettingDetail;
+use App\Models\User;
+use Illuminate\Http\Request;
+
+class Step1to5Controller extends Controller
+{
+    public function create($lang = null)
+    {
+
+        $user = auth()->user();
+
+        $countries = Country::where('status', '1')->orderBy('name', 'asc')->get();
+
+        $step1Page = Step1PageSettingDetail::getByLanguageWithFallback($this->selectedLanguage->id, $this->defaultLang->id);
+        $selectLocationSettingPage = SelectLocationSettingDetail::getByLanguageWithFallback($this->selectedLanguage->id, $this->defaultLang->id);
+        // Get location from IP address
+        $ip = request()->ip();
+        $location = geoip()->getLocation($ip);
+        
+        return view('step1to5', [
+            'step1Page' => $step1Page,
+            'selectLocationSettingPage' => $selectLocationSettingPage,
+            'user' => $user,
+            'location' => $location,
+            'countries' => $countries
+        ]);
+    }
+
+    public function update($id, Request $request)
+    {
+        $selectedLanguage = session('selectedLanguage');
+        $step1Page = null;
+        $niceNames = [];
+        if ($selectedLanguage) {
+            // Find the language by abbreviation
+            $selectedLanguage = Language::where('abbreviation', $selectedLanguage)->first();
+            $step1Page = Step1PageSettingDetail::where('language_id', $selectedLanguage->id)->first();
+            $niceNames = [
+                'first_name' => isset($step1Page->first_name_error) ? $step1Page->first_name_error : '',
+                'last_name' => isset($step1Page->last_name_error) ? $step1Page->last_name_error : '',
+                'gender' => isset($step1Page->gender_error) ? $step1Page->gender_error : '',
+                'dob' => isset($step1Page->dob_error) ? $step1Page->dob_error : '',
+                'country' => isset($step1Page->country_error) ? $step1Page->country_error : '',
+                'state' => isset($step1Page->state_error) ? $step1Page->state_error : '',
+                'city' => isset($step1Page->city_error) ? $step1Page->city_error : '',
+                'zipcode' => isset($step1Page->zip_code_error) ? $step1Page->zip_code_error : '',
+                'bio' => isset($step1Page->bio_error) ? $step1Page->bio_error : '',
+            ];
+        } else {
+            $selectedLanguage = Language::where('is_default', 1)->first();
+            $step1Page = Step1PageSettingDetail::where('language_id', $selectedLanguage->id)->first();
+            $niceNames = [
+                'first_name' => isset($step1Page->first_name_error) ? $step1Page->first_name_error : '',
+                'last_name' => isset($step1Page->last_name_error) ? $step1Page->last_name_error : '',
+                'gender' => isset($step1Page->gender_error) ? $step1Page->gender_error : '',
+                'dob' => isset($step1Page->dob_error) ? $step1Page->dob_error : '',
+                'country' => isset($step1Page->country_error) ? $step1Page->country_error : '',
+                'state' => isset($step1Page->state_error) ? $step1Page->state_error : '',
+                'city' => isset($step1Page->city_error) ? $step1Page->city_error : '',
+                'zipcode' => isset($step1Page->zip_code_error) ? $step1Page->zip_code_error : '',
+                'bio' => isset($step1Page->bio_error) ? $step1Page->bio_error : '',
+            ];
+        }
+
+        $request->validate([
+            'first_name' => 'required|string|max:25|regex:/^[a-zA-Z\s\-]+$/',
+            'last_name' => 'required|string|max:25|regex:/^[a-zA-Z\s\-]+$/',
+            'gender' => 'required',
+            'dob' => [
+                'required',
+                'date',
+                function ($attribute, $value, $fail) {
+                    $birth = \Carbon\Carbon::parse($value);
+                    if ($birth->age < 18) {
+                        $fail('You must be at least 18 years old to join ProximaRide. Please check your date of birth or refer to our Terms of Service.');
+                    }
+                },
+            ],
+            'country' => 'required',
+            'state' => 'nullable',
+            'city' => 'nullable',
+            'zipcode' => 'required|string|max:' . (request()->input('country') == 39 ? 7 : 10),
+            'bio' => 'required|max:300',
+        ], [
+            'first_name.required' => 'The first name is required',
+            'first_name.string' => 'The first name must be a string',
+            'first_name.max' => 'The first name may not be greater than 25 characters',
+            'first_name.regex' => 'The first name must contain only letters, spaces, and hyphens',
+            'last_name.required' => 'The last name is required',
+            'last_name.string' => 'The last name must be a string',
+            'last_name.max' => 'The last name may not be greater than 25 characters',
+            'last_name.regex' => 'The last name must contain only letters, spaces, and hyphens',
+            'gender.required' => 'The gender is required',
+            'dob.required' => 'The date of birth is required',
+            'dob.date' => 'The date of birth must be a valid date',
+            'country.required' => 'The country is required',
+            'state.nullable' => 'The state may be null',
+            'city.nullable' => 'The city may be null',
+            'zipcode.required' => 'The zip code is required',
+            'zipcode.string' => 'The zip code must be a string',
+            'zipcode.max' => 'The zip code may not be greater than ' . (request()->input('country') == 39 ? 7 : 10) . ' characters',
+            'bio.required' => 'The bio is required',
+            'bio.max' => 'The bio may not be greater than 300 characters',
+            'bio.string' => 'The bio must be a string',
+            'bio.max' => 'The bio may not be greater than 300 characters',
+            'bio.string' => 'The bio must be a string',
+        ], $niceNames);
+
+        // Validate state and city existence if provided
+        $stateValue = null;
+        $cityValue = null;
+
+        if ($request->state && $request->state != '0') {
+            $stateExists = \App\Models\State::where('id', $request->state)
+                ->where('country_id', $request->country)
+                ->exists();
+            if (!$stateExists) {
+                return redirect()->back()->withErrors(['state' => 'Invalid state selected for the given country'])->withInput();
+            }
+            $stateValue = $request->state;
+        }
+
+        if ($request->city && $request->city != '0') {
+            $cityInput = $request->city;
+            if (is_string($cityInput) && str_starts_with($cityInput, 'api_')) {
+                // City from API (GeoNames/CountriesNow) – find or create by name + state
+                $cityName = $request->input('city_name') ?: str_replace('_', ' ', preg_replace('/^api_/', '', $cityInput));
+                if (!$stateValue || $cityName === '') {
+                    return redirect()->back()->withErrors(['city' => 'Invalid city selected for the given state'])->withInput();
+                }
+                $city = \App\Models\City::firstOrCreate(
+                    [
+                        'name' => $cityName,
+                        'state_id' => $stateValue,
+                    ],
+                    ['name' => $cityName, 'state_id' => $stateValue, 'status' => 1]
+                );
+                if ($city->exists && $city->getAttribute('status') !== 1) {
+                    $city->update(['status' => 1]);
+                }
+                $cityValue = $city->id;
+            } else {
+                $cityQuery = \App\Models\City::where('id', $cityInput);
+                if ($stateValue) {
+                    $cityQuery->where('state_id', $stateValue);
+                }
+                $cityExists = $cityQuery->exists();
+                if (!$cityExists) {
+                    return redirect()->back()->withErrors(['city' => 'Invalid city selected for the given state'])->withInput();
+                }
+                $cityValue = $cityInput;
+            }
+        }
+
+        User::whereId($id)->update([
+            'first_name' => $request->first_name,
+            'last_name' => $request->last_name,
+            'gender' => $request->gender,
+            'dob' => $request->dob,
+            'country' => $request->country,
+            'state' => $stateValue,
+            'city' => $cityValue,
+            'zipcode' => $request->zipcode,
+            'about' => $request->bio,
+            'step1' => 1
+        ]);
+
+        $user = User::whereId($id)->first();
+        if (!$user->profile_image) {
+            if ($request->gender === 'male') {
+                User::whereId($id)->update([
+                    'profile_image' => 'male.png',
+                ]);
+            } elseif ($request->gender === 'female') {
+                User::whereId($id)->update([
+                    'profile_image' => 'female.png',
+                ]);
+            } elseif ($request->gender === 'prefer not to say') {
+                User::whereId($id)->update([
+                    'profile_image' => 'neutral.png',
+                ]);
+            }
+        }
+
+        return redirect()->route('step2to5', ['lang' => $selectedLanguage->abbreviation]);
+    }
+}
